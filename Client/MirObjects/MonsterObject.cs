@@ -65,7 +65,12 @@ namespace Client.MirObjects
 
         public SpellEffect CurrentEffect;
 
-        public MonsterObject(uint objectID) : base(objectID) { }
+        public MonsterObject(uint objectID) : base(objectID) 
+        {
+            CurrentEffect = SpellEffect.None;
+            TargetPoint = Point.Empty;
+            EffectFrameIndex = 0;
+        }
 
         public void Load(S.ObjectMonster info, bool update = false)
         {

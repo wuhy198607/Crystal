@@ -362,3 +362,16 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Build
+
+# Ignore everything
+*
+!*/
+
+# But not these directories
+!Configs/
+!Envir/
+!Envir/**
+
+# And not these files
+!.gitignore
+!README.md

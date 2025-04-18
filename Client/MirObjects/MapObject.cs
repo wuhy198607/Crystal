@@ -508,8 +508,10 @@ namespace Client.MirObjects
             if (Race == ObjectType.Monster)
             {
                 string healthText = $"{PercentHealth}%";
-                Size textSize = ChatFont.Measure(healthText);
-                ChatFont.Draw(healthText, new Point(DisplayRectangle.X + 8 + (32 - textSize.Width) / 2, DisplayRectangle.Y - 64 - textSize.Height - 2), Color.White, false);
+                Size textSize = TextRenderer.MeasureText(CMain.Graphics, healthText, ChatFont);
+                TextRenderer.DrawText(CMain.Graphics, healthText, ChatFont, 
+                    new Point(DisplayRectangle.X + 8 + (32 - textSize.Width) / 2, DisplayRectangle.Y - 64 - textSize.Height - 2), 
+                    Color.White, TextFormatFlags.Default);
             }
         }
 
