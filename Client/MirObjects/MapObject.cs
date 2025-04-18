@@ -503,6 +503,14 @@ namespace Client.MirObjects
             }
 
             Libraries.Prguse2.Draw(index, new Rectangle(0, 0, (int)(32 * PercentHealth / 100F), 4), new Point(DisplayRectangle.X + 8, DisplayRectangle.Y - 64), Color.White, false);
+
+            // 添加血量数值显示
+            if (Race == ObjectType.Monster)
+            {
+                string healthText = $"{PercentHealth}%";
+                Size textSize = ChatFont.Measure(healthText);
+                ChatFont.Draw(healthText, new Point(DisplayRectangle.X + 8 + (32 - textSize.Width) / 2, DisplayRectangle.Y - 64 - textSize.Height - 2), Color.White, false);
+            }
         }
 
         public void DrawPoison()
