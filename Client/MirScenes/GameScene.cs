@@ -10855,12 +10855,15 @@ namespace Client.MirScenes
                                 break;
                             case 2://Candle
                                 lightColour = Color.FromArgb(255, 180, 180, 180);
+                                light *= 3;
                                 break;
                             case 3://Torch
                                 lightColour = Color.FromArgb(255, 240, 240, 240);
+                                light *= 3;
                                 break;
                             default://Peddler Torch
                                 lightColour = Color.FromArgb(255, 255, 255, 255);
+                                light *= 3;
                                 break;
                         }
                     }

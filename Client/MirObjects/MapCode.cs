@@ -514,7 +514,7 @@
                         if (MapCells[x, y].Light >= 100 && MapCells[x, y].Light <= 119)
                             MapCells[x, y].FishingCell = true;
                         else
-                            MapCells[x, y].Light *= 2;//expand general mir3 lighting as default range is small. Might break new colour lights.
+                            MapCells[x, y].Light *= 6;//expand general mir3 lighting as default range is small. Might break new colour lights.
                     }
             }
             catch (Exception ex)
@@ -561,7 +561,7 @@
                         MapCells[x, y].MiddleAnimationTick = 1;
                         MapCells[x, y].FrontAnimationTick = 1;
                         MapCells[x, y].Light = (byte)(Bytes[offset] & 0x0F);
-                        MapCells[x, y].Light *= 4;//far wants all light on mir3 maps to be maxed :p
+                        MapCells[x, y].Light *= 6;//far wants all light on mir3 maps to be maxed :p
                         offset += 8;
                         if ((flag & 0x01) != 1) MapCells[x, y].BackImage |= 0x20000000;
                         if ((flag & 0x02) != 2) MapCells[x, y].FrontImage = (short)((UInt16)MapCells[x, y].FrontImage | 0x8000);
