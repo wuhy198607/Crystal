@@ -326,10 +326,7 @@ namespace Client.MirObjects
 
         public override bool ShouldDrawHealth()
         {
-            string name = string.Empty;
-            if (Name.Contains("(")) name = Name.Substring(Name.IndexOf("(") + 1, Name.Length - Name.IndexOf("(") - 2);
-
-            return Name.EndsWith(string.Format("({0})", User.Name)) || MirScenes.Dialogs.GroupDialog.GroupList.Contains(name);
+            return true;  // 总是显示血量
         }
 
         public override void Process()
