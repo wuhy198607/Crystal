@@ -487,7 +487,7 @@ namespace Client.MirObjects
         }
         public void DrawHealth()
         {
-            string name = Name;            
+            string name = Name;
             if (Name.Contains("(")) name = Name.Substring(Name.IndexOf("(") + 1, Name.Length - Name.IndexOf("(") - 2);
 
             if (Dead) return;
@@ -500,7 +500,7 @@ namespace Client.MirObjects
 
             // 绘制血条背景
             Libraries.Prguse2.Draw(0, DisplayRectangle.X + 8, DisplayRectangle.Y - 64);
-            
+
             // 绘制血条
             int index = 1;
             switch (Race)
@@ -514,14 +514,14 @@ namespace Client.MirObjects
                 case ObjectType.Hero:
                     if (GroupDialog.GroupList.Contains(MapObject.HeroObject?.OwnerName))
                     {
-                        index = 11; 
+                        index = 11;
                     }
                     if (HeroObject.HeroObject?.OwnerName == User.Name)
                     {
-                        index = 1; 
+                        index = 1;
                         if ((MapObject.HeroObject.Class != MirClass.Warrior && HeroObject.Level > 7) || (MapObject.HeroObject.Class == MirClass.Warrior && HeroObject.Level > 25))
                         {
-                           Libraries.Prguse2.Draw(10, new Rectangle(0, 0, (int)(32 * PercentMana / 100F), 4), new Point(DisplayRectangle.X + 8, DisplayRectangle.Y - 60), Color.White, false);
+                            Libraries.Prguse2.Draw(10, new Rectangle(0, 0, (int)(32 * PercentMana / 100F), 4), new Point(DisplayRectangle.X + 8, DisplayRectangle.Y - 60), Color.White, false);
                         }
                     }
                     break;
@@ -544,6 +544,7 @@ namespace Client.MirObjects
                 healthLabel.Location = new Point(DisplayRectangle.X + 8, DisplayRectangle.Y - 72);
                 healthLabel.Draw();
             }
+        }
 
         public void DrawPoison()
         {
