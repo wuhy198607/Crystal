@@ -87,6 +87,28 @@ namespace Client.MirObjects
         }
         public long HealthTime;
 
+        private int hp;
+        public virtual int HP
+        {
+            get { return hp; }
+            set
+            {
+                if (hp == value) return;
+                hp = value;
+            }
+        }
+
+        private int maxHP;
+        public virtual int MaxHP
+        {
+            get { return maxHP; }
+            set
+            {
+                if (maxHP == value) return;
+                maxHP = value;
+            }
+        }
+
         private byte percentMana;
         public virtual byte PercentMana
         {
@@ -460,7 +482,8 @@ namespace Client.MirObjects
         }
         public virtual bool ShouldDrawHealth()
         {
-            return false;
+            bool shouldDraw = Race == ObjectType.Monster || Race == ObjectType.Player || Race == ObjectType.Hero;
+            return shouldDraw;
         }
         public void DrawHealth()
         {
@@ -475,9 +498,11 @@ namespace Client.MirObjects
                 if (!ShouldDrawHealth()) return;
             }
 
+            // 绘制血条背景
             Libraries.Prguse2.Draw(0, DisplayRectangle.X + 8, DisplayRectangle.Y - 64);
+            
+            // 绘制血条
             int index = 1;
-
             switch (Race)
             {
                 case ObjectType.Player:
@@ -487,9 +512,9 @@ namespace Client.MirObjects
                     if (GroupDialog.GroupList.Contains(name) || name == User.Name) index = 11;
                     break;
                 case ObjectType.Hero:
-                    if (GroupDialog.GroupList.Contains(MapObject.HeroObject?.OwnerName)) // Fails but not game breaking
+                    if (GroupDialog.GroupList.Contains(MapObject.HeroObject?.OwnerName))
                     {
-                            index = 11; 
+                        index = 11; 
                     }
                     if (HeroObject.HeroObject?.OwnerName == User.Name)
                     {
@@ -501,19 +526,24 @@ namespace Client.MirObjects
                     }
                     break;
             }
-
             Libraries.Prguse2.Draw(index, new Rectangle(0, 0, (int)(32 * PercentHealth / 100F), 4), new Point(DisplayRectangle.X + 8, DisplayRectangle.Y - 64), Color.White, false);
-
-            // 添加血量数值显示
+            // Draw health text
             if (Race == ObjectType.Monster)
             {
                 string healthText = $"{PercentHealth}%";
-                Size textSize = TextRenderer.MeasureText(CMain.Graphics, healthText, ChatFont);
-                TextRenderer.DrawText(CMain.Graphics, healthText, ChatFont, 
-                    new Point(DisplayRectangle.X + 8 + (32 - textSize.Width) / 2, DisplayRectangle.Y - 64 - textSize.Height - 2), 
-                    Color.White, TextFormatFlags.Default);
+                var healthLabel = new MirLabel
+                {
+                    AutoSize = true,
+                    BackColour = Color.FromArgb(128, 0, 0, 0),
+                    ForeColour = Color.White,
+                    OutLine = true,
+                    OutLineColour = Color.Black,
+                    Text = healthText,
+                    Font = new Font(Settings.FontName, 7F, FontStyle.Bold)
+                };
+                healthLabel.Location = new Point(DisplayRectangle.X + 8, DisplayRectangle.Y - 72);
+                healthLabel.Draw();
             }
-        }
 
         public void DrawPoison()
         {
