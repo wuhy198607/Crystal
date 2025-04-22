@@ -530,16 +530,16 @@ namespace Client.MirObjects
             // Draw health text
             if (Race == ObjectType.Monster)
             {
-                string healthText = $"{PercentHealth}%";
+                string healthText = $"{PercentHealth}% ({HP}/{MaxHP})";
                 var healthLabel = new MirLabel
                 {
                     AutoSize = true,
-                    BackColour = Color.FromArgb(128, 0, 0, 0),
-                    ForeColour = Color.White,
+                    BackColour = Color.FromArgb(140, 0, 0, 0),
+                    ForeColour = Color.FromArgb(255, 220, 220, 220),
                     OutLine = true,
                     OutLineColour = Color.Black,
                     Text = healthText,
-                    Font = new Font(Settings.FontName, 7F, FontStyle.Bold)
+                    Font = new Font(Settings.FontName, 5.5F, FontStyle.Bold)
                 };
                 healthLabel.Location = new Point(DisplayRectangle.X + 8, DisplayRectangle.Y - 72);
                 healthLabel.Draw();
